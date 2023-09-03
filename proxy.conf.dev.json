@@ -1,7 +1,0 @@
-{
-  "/api": {
-    "target": "https://gorest.co.in/public/v2",
-    "secure": false,
-    "changeOrigin": true
-  }
-}

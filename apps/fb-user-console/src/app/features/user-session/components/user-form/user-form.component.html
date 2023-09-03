@@ -1,0 +1,57 @@
+<form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmit()">
+    <div class="UserForm__Container">
+        <div class="UserForm__Content">
+            <mat-card class="UserForm__Card">
+                <mat-toolbar class="UserForm__Toolbar" color="primary">User Registration Form </mat-toolbar>
+                <mat-form-field appearance="outline">
+                    <input
+                        type="text"
+                        autofocus
+                        matInput
+                        title="Name"
+                        maxlength="50"
+                        formControlName="name"
+                    />
+                    <mat-label>Name</mat-label>
+                    <mat-error *ngIf="f['name'].hasError('required')">
+                        <strong>Name is required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                <input
+                    type="email"
+                    matInput
+                    title="Name"
+                    maxlength="50"
+                    formControlName="email"
+                />
+                <mat-label>Email</mat-label>
+                <mat-error *ngIf="f['email'].hasError('required')">
+                    <strong>Email is required</strong>
+                </mat-error>
+                <mat-error *ngIf="f['email'].hasError('pattern')">
+                    <strong>Email must be a valid email address</strong>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                <mat-select
+                    data-cy="testset-output-type"
+                    formControlName="gender"
+                    title="Gender">
+                    <mat-option *ngFor="let opt of this.genderOpts" [value]="opt">{{opt}} </mat-option>
+                </mat-select>
+                <mat-label>Gender</mat-label>
+                <mat-error *ngIf="f['gender'].hasError('required')">
+                    <strong>Gender is required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <div class="UserForm__Submit">
+                    <button mat-button color="primary"  type="button" (click)="clear()">Reset</button>
+                    <button mat-flat-button color="primary"  type="submit">Submit</button>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</form>
+
+

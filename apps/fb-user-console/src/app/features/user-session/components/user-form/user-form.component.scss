@@ -1,0 +1,31 @@
+.UserForm{
+    &__Container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+    }
+    &__Content {
+        width: 30%;
+        display: block;
+        margin: 0 auto;  
+    }
+
+    &__Card {
+        padding-bottom:2rem;
+        mat-form-field{
+            margin: 1rem 2rem 0 2rem;
+        }
+    }
+    &__Toolbar{
+
+    }
+
+    &__Submit {
+        margin:0 1rem;
+        display:flex;
+        justify-content: center;
+    }
+
+}

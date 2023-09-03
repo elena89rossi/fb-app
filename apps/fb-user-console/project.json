@@ -19,7 +19,10 @@
           "apps/fb-user-console/src/favicon.ico",
           "apps/fb-user-console/src/assets"
         ],
-        "styles": ["apps/fb-user-console/src/styles.scss"],
+        "styles": [
+          "node_modules/bootstrap/dist/css/bootstrap.css",
+          "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+          "apps/fb-user-console/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -57,7 +60,6 @@
           "browserTarget": "fb-user-console:build:production"
         },
         "development": {
-          "proxyConfig": "proxy.conf.dev.json",
           "browserTarget": "fb-user-console:build:development"
         }
       },

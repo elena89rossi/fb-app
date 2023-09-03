@@ -18,3 +18,6 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 
 
 con il comanco nopm run  start di default cvienne utilizzato il file proxy.conf.dev per riuscire in locale a puntare alle api di gorest
+
+APP:
+l'entri point dell'applicativo è definito tramite composizione mofulare mentre le featur fanno uso di standalone component ( l'obiettivo era di utilizzare entrambe le modalità)

@@ -3,8 +3,7 @@ import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "fb-console-nx-welcome",
-  standalone: true,
-  imports: [CommonModule],
+  standalone: false,
   template: `
     <!--
      * * * * * * * * * * * * * * * * * * * * * * * * * * * *

@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "types": ["node", "jasmine"],
     "paths": {
+      "@fb-console/core": ["libs/core/src/index.ts"],
       "@fb-console/ui-components": ["libs/ui-components/src/index.ts"]
     }
   },

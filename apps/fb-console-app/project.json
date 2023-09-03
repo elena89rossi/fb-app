@@ -1,0 +1,154 @@
+{
+  "name": "fb-console-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/fb-console-app/src",
+  "prefix": "fb-console",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/fb-console-app",
+        "index": "apps/fb-console-app/src/index.html",
+        "main": "apps/fb-console-app/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/fb-console-app/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "baseHref": "/",
+        "assets": [
+          "apps/fb-console-app/src/favicon.ico",
+          "apps/fb-console-app/src/assets"
+        ],
+        "styles": [
+          "apps/fb-console-app/src/styles/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "local": {
+          "budgets": [
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/fb-console-app/src/environments/environment.ts",
+              "with": "apps/fb-console-app/src/environments/environment.ts"
+            }
+          ],
+          "aot": false,
+          "optimization": false,
+          "sourceMap": true,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": false
+        },
+        "local-mock": {
+          "budgets": [
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/fb-console-app/src/environments/environment.ts",
+              "with": "apps/fb-console-app/src/environments/environment.local-mock.ts"
+            }
+          ],
+          "aot": false,
+          "optimization": false,
+          "sourceMap": true,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": false
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/fb-console-app/src/environments/environment.ts",
+              "with": "apps/fb-console-app/src/environments/environment.production.ts"
+            }
+          ],
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "fileReplacements": [],
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 4202,
+        "ssl": true
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "fb-console-app:build:production"
+        },
+        "local-dev": {
+          "proxyConfig": "proxy.conf.dev.json",
+          "browserTarget": "fb-console-app:build:development"
+        },
+        "local-mock": {
+          "browserTarget": "fb-console-app:build:local-mock"
+        }
+      },
+      "defaultConfiguration": "local-dev"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "fb-console-app:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/fb-console-app/**/*.ts",
+          "apps/fb-console-app/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "tsConfig": "apps/fb-console-app/tsconfig.spec.json",
+        "karmaConfig": "apps/fb-console-app/karma.conf.js",
+        "polyfills": ["zone.js", "zone.js/testing"],
+        "codeCoverageExclude": ["/**/*.stub.ts"],
+        "styles": [],
+        "scripts": [],
+        "assets": []
+      }
+    }
+  },
+  "tags": []
+}

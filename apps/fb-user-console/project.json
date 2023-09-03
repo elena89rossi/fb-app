@@ -1,0 +1,100 @@
+{
+  "name": "fb-user-console",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "fb-console",
+  "sourceRoot": "apps/fb-user-console/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/fb-user-console",
+        "index": "apps/fb-user-console/src/index.html",
+        "main": "apps/fb-user-console/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/fb-user-console/tsconfig.app.json",
+        "assets": [
+          "apps/fb-user-console/src/favicon.ico",
+          "apps/fb-user-console/src/assets"
+        ],
+        "styles": ["apps/fb-user-console/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+        
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "fb-user-console:build:production"
+        },
+        "development": {
+          "proxyConfig": "proxy.conf.dev.json",
+          "browserTarget": "fb-user-console:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "fb-user-console:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/fb-user-console/**/*.ts",
+          "apps/fb-user-console/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "tsConfig": "apps/fb-user-console/tsconfig.spec.json",
+        "karmaConfig": "apps/fb-user-console/karma.conf.js",
+        "polyfills": ["zone.js", "zone.js/testing"],
+        "styles": [],
+        "scripts": [],
+        "assets": []
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/web:file-server",
+      "options": {
+        "buildTarget": "fb-user-console:build"
+      }
+    }
+  }
+}

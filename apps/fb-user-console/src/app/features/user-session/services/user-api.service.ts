@@ -3,8 +3,8 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { AbstractBaseHttpService } from 'apps/fb-user-console/src/app/commons/abstract/abstract-base-http.service';
 import { Injectable } from '@angular/core';
-import { IUser } from '../../models/user.interface';
-import { USERS_SERVICE } from '../../static-entities/apis/apis-service-names';
+import { IUser } from '../models/user.interface';
+import { USERS_SERVICE } from '../static-entities/apis/apis-service-names';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,8 @@ export class UserApiService extends AbstractBaseHttpService {
     return this.http.post<IUser>(this.getControllerBaseUrl(), user);
   }
 
-  public deleteUSer(id: number): Observable<HttpResponse<null>> {
+  public deleteUser(id: number): Observable<HttpResponse<null>> {
+    //TODO VERIFICARE COSA RITPRNA
       return this.http.delete(this.getControllerBaseUrl() + id).pipe(map(() => new HttpResponse<null>()));
   }
 }

@@ -1,3 +1,4 @@
 export enum USER_ROUTES {
-    RegisterNewUser = 'register'
+    RegisterNewUser = 'register',
+    UserDetail = 'user-session'
 }

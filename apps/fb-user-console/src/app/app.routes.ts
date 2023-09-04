@@ -6,12 +6,17 @@ import { UserFormComponent } from "./features/user-session/components/user-form/
 
 export const appRoutes: Route[] = [
     {
-        path: '',
+        path: USER_ROUTES.UserDetail + '/:id',
         canActivate: [UserSessionGuard],
         component: UserSessionContainerComponent
         // loadComponent: () =>
         //   import('./features/user-session/components/user-session-container/user-session-container.component')
         //     .then(m => m.UserSessionContainerComponent)
+    },
+    {
+        path: '',
+        canActivate: [UserSessionGuard],
+        component: UserSessionContainerComponent
     },
     {
         path: USER_ROUTES.RegisterNewUser,
@@ -20,7 +25,7 @@ export const appRoutes: Route[] = [
         //   import('./features/user-session/components/user-session-container/user-session-container.component')
         //     .then(m => m.UserSessionContainerComponent)
     },
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo:  USER_ROUTES.RegisterNewUser }
 ];
 
 export const APP_ROUTES = RouterModule.forRoot(appRoutes);

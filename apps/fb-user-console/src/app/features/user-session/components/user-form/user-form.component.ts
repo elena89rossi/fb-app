@@ -10,6 +10,10 @@ import { MatCardModule } from '@angular/material/card';
 import { USER_STATUS } from '../../static-entities/user-status/user-status.enum';
 import { GENDER } from '../../static-entities/gender/gender.enum';
 import { IUser } from '../../models/user.interface';
+import { Subject, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
+import { USER_ROUTES } from '../../static-entities/routes/user-routes.enum';
+import { UserSessionService } from '../../services/user-session.service';
 
 export const EMAIL_VALIDATOR_PATTERN = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 
@@ -21,12 +25,11 @@ export const EMAIL_VALIDATOR_PATTERN = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$
   styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent {
-  userForm!: FormGroup;
-
+  protected userForm!: FormGroup;
   protected genderOpts = [ GENDER.Famale, GENDER.Male ];
+  private destroyed$: Subject<void> = new Subject();
 
-  constructor(
-      private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private userSessionService: UserSessionService, private router: Router) { }
 
   ngOnInit() {
      this.initUserForm();
@@ -34,12 +37,19 @@ export class UserFormComponent {
 
   get f() { return this.userForm.controls; }
 
-  protected onSubmit(): void {
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
+  protected onSubmit(user: FormGroup): void {
+    debugger;
+    console.log(this.userForm)
+    console.log(user)
     if (!this.userForm.invalid) {
-      alert("sono un form valido")
-      this.save();
+      //TODO TIPIZZARE IL FORMGROUP
+      this.saveUser(this.userForm.value);
     } else {
-      alert("sono un form invalido")
       this.markAllAsTouched();
     }
   }
@@ -54,9 +64,17 @@ export class UserFormComponent {
     });
   }
 
-  private save(): void {
+  private saveUser(user: IUser): void {
    //TODO API
-   alert("IMPLEMENTARE IL SERVIZION");
+   debugger;
+   this.userSessionService.saveUser(user).pipe(
+    takeUntil(this.destroyed$)
+   ).subscribe((user: IUser) => {
+    if(user?.id) {
+      this.router.navigate([USER_ROUTES.UserDetail, user.id]);
+      this.router.navigate(['/']);
+    }
+   })
   }
 
   private initUserForm(): void {

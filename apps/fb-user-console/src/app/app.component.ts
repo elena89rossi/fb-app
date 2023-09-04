@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { UserApiService } from "./features/user-session/services/api/user-api.service";
 import { IUser } from "./features/user-session/models/user.interface";
 import { Observable } from "rxjs";
 
@@ -11,9 +10,7 @@ import { Observable } from "rxjs";
 })
 export class AppComponent implements OnInit{
   title = "fb-user-console";
-  users$!: Observable<IUser[]>;
-  constructor(private userApiService: UserApiService) {}
+  constructor() {}
   ngOnInit(): void {
-      this.users$ = this.userApiService.getAllUsers();
   }
 }

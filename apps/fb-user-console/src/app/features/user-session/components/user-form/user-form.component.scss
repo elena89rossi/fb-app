@@ -1,11 +1,14 @@
 .UserForm{
     &__Container {
+        margin-top:4rem;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     &__Content {
-        width: 30%;
+
+        width: 50%;
+        height: 97vh;
         display: block;
         margin: 0 auto;  
     }

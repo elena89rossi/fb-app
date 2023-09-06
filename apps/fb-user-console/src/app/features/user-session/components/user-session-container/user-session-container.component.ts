@@ -29,16 +29,30 @@ export class UserSessionContainerComponent implements OnInit, OnDestroy {
       this.user$ = this.userSessionService.currentUser$.pipe(takeUntil(this.destroyed$));
       this.checkForUserUpdate();
   }
-
+  /**
+   * Destroys the component and cleans up any resources.
+   *
+   * @return {void} 
+   */
   ngOnDestroy(): void {
       this.destroyed$.next();
       this.destroyed$.complete();
   }
-
+  /**
+   * Retrieves the keys of an object.
+   *
+   * @param {any} obj - The object to retrieve the keys from.
+   * @return {string[]} An array containing the keys of the object.
+   */
   protected getObjectKeys(obj: any): string[] {
     return Object.keys(obj);
   }
-
+  /**
+   * Check for user update.
+   *
+   * @private
+   * @returns {void} 
+   */
   private checkForUserUpdate(): void {
     const int = 300000;
     this.latestUpdateDate$ = interval(int).pipe(

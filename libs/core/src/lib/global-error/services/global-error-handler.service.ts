@@ -17,9 +17,10 @@ export class GlobalErrorHandlerService {
    * @return {void} This function does not return a value.
    */
   public handleError(error: Error | HttpErrorResponse): void {
-    debugger;
     if (error instanceof HttpErrorResponse) {
+      this.notificationService.showError(error.error);
+    } else {
       this.notificationService.showError(error.message);
-    } 
+    }
   }
 }

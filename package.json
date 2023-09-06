@@ -7,6 +7,7 @@
     "build": "nx build fb-user-console",
     "build:ui": "nx build ui",
     "test:user-console": "nx test fb-user-console",
+    "test:core": "nx test core",
     "test:ui": "nx test ui",
     "test:coverage:fb-user-console": "nx test fb-user-console --code-coverage",
     "test:coverage:ui-components-lib": "nx test ui-components --code-coverage",

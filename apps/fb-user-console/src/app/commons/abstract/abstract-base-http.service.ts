@@ -15,7 +15,11 @@ export abstract class AbstractBaseHttpService {
   public getBaseUrl(): string {
     return environment.baseUrl;
   }
-
+  /**
+   * Returns the base URL for the controller.
+   *
+   * @return {string} The base URL for the controller.
+   */
   public getControllerBaseUrl(): string {
     return this.getBaseUrl() + this.controllerName;
   }

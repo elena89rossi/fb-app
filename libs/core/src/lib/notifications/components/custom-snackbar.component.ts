@@ -29,7 +29,6 @@ export class CustomSnackBarComponent implements OnInit {
    * @return {void} None
    */
   public ngOnInit(): void {
-    debugger;
     this.message = this.data.message;
     if (this.data.closeKey) {
       this.close = this.data.closeKey;

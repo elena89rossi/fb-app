@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { NgModule } from '@angular/core';
 import { CoreModule } from '@fb-console/core';
 import { CommonModule } from '@angular/common';

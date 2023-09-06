@@ -15,7 +15,6 @@ export class UserSessionGuard {
      * @return {boolean} Returns true if the user can activate the route, false otherwise.
      */
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        debugger;
         const CURRENT_USER =  localStorage.getItem('currentUser');
         if (CURRENT_USER) {
             return true;

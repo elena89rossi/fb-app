@@ -47,15 +47,6 @@ export class UserSessionService {
           }
         )
       )
-    // return this.currentUser$.pipe(
-    //   distinctUntilChanged(),
-    //   map((user:IUser)=> user.id),
-    //   switchMap((id: number) => this.userApiService.getUser(id)),
-    //   tap((user: IUser) => {
-    //     this.currenUserSubject.next(user)
-    //     }
-    //   )    
-    // )
   }
 
   /**

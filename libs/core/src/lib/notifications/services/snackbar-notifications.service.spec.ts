@@ -1,6 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-
+import SpyObj = jasmine.SpyObj;
 import { SnackbarNotificationsService } from './snackbar-notifications.service';
+import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef } from '@angular/material/snack-bar';
+import { NgZone } from '@angular/core';
+import { ISnackBarData } from '../models/snackbar-data.interface';
+import { lastValueFrom, of } from 'rxjs';
+import { CustomSnackBarComponent } from '../components/custom-snackbar.component';
 
 describe('SnackbarNotificationsService', () => {
   let service: SnackbarNotificationsService;
@@ -14,7 +20,7 @@ describe('SnackbarNotificationsService', () => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', ['openFromComponent']);
     ngZoneSpy = jasmine.createSpyObj('NgZone', ['run']);
-    ngZoneSpy.run.and.callFake(fn => fn());
+    ngZoneSpy.run.and.callFake((fn: any) => fn());
 
     TestBed.configureTestingModule({
       providers: [
@@ -29,7 +35,7 @@ describe('SnackbarNotificationsService', () => {
       ]
     });
 
-    service = TestBed.inject(SnackbarNotificationService);
+    service = TestBed.inject(SnackbarNotificationsService);
     showSnackBarSpy = spyOn(service, 'showSnackBar');
     zoneRunSpy = spyOn((<any>service), 'zoneRun');
   });
@@ -39,12 +45,12 @@ describe('SnackbarNotificationsService', () => {
   });
 
   it('should showSuccess', () => {
-    service.showSuccess(TranslocoUtilityService.getTranslocoEntity('message'), 'close');
+    service.showSuccess('message', 'close');
     expect(service.showSnackBar).toHaveBeenCalledWith({
       duration: 5000,
       panelClass: ['success-snackbar'],
       data: {
-        message: TranslocoUtilityService.getTranslocoEntity('message'),
+        message: 'message',
         closeKey: 'close'
       } as ISnackBarData
     }, undefined);
@@ -61,33 +67,13 @@ describe('SnackbarNotificationsService', () => {
     }, 'route');
   });
 
-  it('should showCustomError', () => {
-    service.showCustomError({ message: 'message' } as ISnackBarData, 'route');
-    expect(service.showSnackBar).toHaveBeenCalledWith({
-      panelClass: ['alert-snackbar'],
-      data: {
-        message: 'message',
-      } as ISnackBarData
-    }, 'route');
-  });
-
   it('should showWarning', () => {
-    service.showWarning(TranslocoUtilityService.getTranslocoEntity('message'), 'close');
-    expect(service.showSnackBar).toHaveBeenCalledWith({
-      panelClass: ['warning-snackbar'],
-      data: {
-        message: TranslocoUtilityService.getTranslocoEntity('message'),
-        closeKey: 'close'
-      } as ISnackBarData
-    }, undefined);
-  });
-
-  it('should showCustomWarning', () => {
-    service.showCustomWarning({ message: 'message' } as ISnackBarData);
+    service.showWarning('message', 'close');
     expect(service.showSnackBar).toHaveBeenCalledWith({
       panelClass: ['warning-snackbar'],
       data: {
         message: 'message',
+        closeKey: 'close'
       } as ISnackBarData
     }, undefined);
   });
@@ -104,7 +90,7 @@ describe('SnackbarNotificationsService', () => {
 
     expect(zoneRunSpy).toHaveBeenCalledWith(
       {
-        data: { message: 'message', closeKey: 'WRITER-UI.CLOSE' },
+        data: { message: 'message', closeKey: 'Close' },
         duration: 1,
         panelClass: 'class',
       } as MatSnackBarConfig

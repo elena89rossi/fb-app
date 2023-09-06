@@ -19,20 +19,25 @@ export class UserSessionContainerComponent implements OnInit {
   private destroyed$: Subject<void> = new Subject();
   constructor(private userSessionService: UserSessionService, private route: ActivatedRoute){}
 
+  /**
+   * Initializes the component and subscribes to the currentUser$ observable.
+   *
+   * @return {void}
+   */
   ngOnInit(): void {
       this.user$ = this.userSessionService.currentUser$.pipe(takeUntil(this.destroyed$))
 
   }
-  
-  private getIdFromRouteAndRefreshData(): void {
-    debugger;
-    this.route.params.pipe(
-      takeUntil(this.destroyed$),
-      tap((params: Params) => {
-        this.userId = params['id'];
-        this.userSessionService.getCurrentUser(this.userId);
-      }),
-    ).subscribe();
-  }
+  //TODO REMOVE
+  // private getIdFromRouteAndRefreshData(): void {
+  //   debugger;
+  //   this.route.params.pipe(
+  //     takeUntil(this.destroyed$),
+  //     tap((params: Params) => {
+  //       this.userId = params['id'];
+  //       this.userSessionService.getCurrentUser(this.userId);
+  //     }),
+  //   ).subscribe();
+  // }
   
 }

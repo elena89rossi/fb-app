@@ -30,18 +30,33 @@ export class UserFormComponent {
   private destroyed$: Subject<void> = new Subject();
 
   constructor(private formBuilder: FormBuilder, private userSessionService: UserSessionService, private router: Router) { }
-
+/**
+ * Initializes the component when it is first created.
+ *
+ * @param {none} - This function has no parameters.
+ * @return {none} - This function does not return a value.
+ */
   ngOnInit() {
      this.initUserForm();
   }
 
   get f() { return this.userForm.controls; }
-
+  
+  /**
+   * Destroys the component and cleans up any resources.
+   *
+   * @return {void}
+   */
   ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
   }
-
+  /**
+   * Submits the user form.
+   *
+   * @param {FormGroup} user - The user form group.
+   * @return {void} This function does not return a value.
+   */
   protected onSubmit(user: FormGroup): void {
     debugger;
     console.log(this.userForm)
@@ -53,17 +68,32 @@ export class UserFormComponent {
       this.markAllAsTouched();
     }
   }
+  /**
+   * Clears the user form and marks it as pristine.
+   */
   protected clear(): void {
     this.userForm.reset();
     this.userForm.markAsPristine();
   }
+
+  /**
+   * Marks all form controls as touched.
+   *
+   * @protected
+   * @return {void} 
+   */
   protected markAllAsTouched(): void {
     Object.keys(this.userForm.controls).forEach((field) => {
       const control = this.userForm.get(field);
       control?.markAsTouched({ onlySelf: true });
     });
   }
-
+  /**
+   * Saves a user and navigate to main route
+   *
+   * @param {IUser} user - The user to be saved.
+   * @return {void} No return value.
+   */
   private saveUser(user: IUser): void {
    this.userSessionService.saveUser(user).pipe(
     takeUntil(this.destroyed$)
@@ -73,7 +103,12 @@ export class UserFormComponent {
     }
    })
   }
-
+  /**
+   * Initializes the user form.
+   *
+   * @private
+   * @returns {void}
+   */
   private initUserForm(): void {
     this.userForm = this.formBuilder.group({
       name: ['', Validators.required],

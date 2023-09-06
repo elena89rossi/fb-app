@@ -18,7 +18,13 @@ export class CardComponent {
   @Input() cardButtonAlignment: 'start' | 'end' = 'end'
 
   @Output() emitActionButtonEvt: EventEmitter<ICardButton> = new EventEmitter<ICardButton>();
-
+  
+  /**
+   * Handles the action button.
+   *
+   * @param {ICardButton} actionName - The name of the action.
+   * @return {void} 
+   */
   protected handleActionButton(actionName: ICardButton): void {
     this.emitActionButtonEvt.emit(actionName);
   }

@@ -14,6 +14,12 @@ export class UserSessionService {
   constructor(private userApiService: UserApiService) {
   }
 
+  /**
+   * Saves a user.
+   *
+   * @param {IUser} user - The user object to be saved.
+   * @return {Observable<IUser>} An observable that emits the saved user.
+   */
   public saveUser(user: IUser): Observable<IUser> {
     return this.userApiService.saveUser(user).pipe(
       distinctUntilChanged(),
@@ -27,6 +33,12 @@ export class UserSessionService {
     )
   }
 
+/**
+ * Retrieves the current user with the specified ID.
+ *
+ * @param {number} id - The ID of the user to retrieve.
+ * @return {Observable<IUser>} The observable that emits the user object.
+ */
   public getCurrentUser(id: number): Observable<IUser> {
     return this.currentUser$.pipe(
       map((user:IUser)=> user.id),
@@ -38,7 +50,11 @@ export class UserSessionService {
     )
   }
 
-  //TODO TYPES
+  /**
+   * Deletes the user by closing their session.
+   *
+   * @return {Observable<any>} An observable that emits the result of the deletion.
+   */
   public deleteUser(): Observable<any> {
     debugger;
     return this.currentUser$.pipe(
@@ -47,6 +63,11 @@ export class UserSessionService {
     ) 
   }
 
+  /**
+   * Retrieves the current user from storage.
+   *
+   * @return {IUser} The current user object.
+   */
   protected retrievecurrentUserFromStrorage(): IUser {
     let currentUser: IUser = {} as IUser;
     const userFromStorage = localStorage.getItem(CURRENT_USER);
@@ -55,10 +76,14 @@ export class UserSessionService {
     }
     return currentUser;
   }
-
-  /** Method that simulate logout operation deleting current user */
-  //TODO TYPES
+  /**
+   * Deleta a user and closes a user session.
+   *
+   * @param {number} id - The ID of the user.
+   * @return {Observable<any>} An Observable that emits the result of deleting the user and performs additional actions.
+   */
   private closeUserSession(id: number): Observable<any> {
+  //TODO TYPES
     return this.userApiService.deleteUser(id).pipe(
       take(1),
       tap(()=> {

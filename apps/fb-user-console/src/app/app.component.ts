@@ -17,15 +17,31 @@ export class AppComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private userSessionService: UserSessionService) {}
+    /**
+   * Initializes the component.
+   *
+   * @return {void} 
+   */
   ngOnInit(): void {
     this.user$ = this.userSessionService.currentUser$;
   }
-
+  /**
+   * Simulates the logout functionality.
+   *
+   * This function is used to simulate the logout behavior by deleting the user's data
+   * and displaying a success message.
+   *
+   * @return {void} This function does not return a value.
+   */
   protected simulateLogout(): void {
     debugger;
     this.userSessionService.deleteUser().subscribe(() => alert('User successfully logged out'));
   }
-
+  /**
+   * Destroys the component and cleans up any resources.
+   *
+   * @return {void} 
+   */
   ngOnDestroy() : void {
     this.destroy$.next();
     this.destroy$.complete();

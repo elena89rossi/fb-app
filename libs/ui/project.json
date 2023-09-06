@@ -1,0 +1,50 @@
+{
+  "name": "ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/src",
+  "prefix": "fb-ui",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/ui/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/ui/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/ui/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "tsConfig": "libs/ui/tsconfig.spec.json",
+        "karmaConfig": "libs/ui/karma.conf.js",
+        "polyfills": ["zone.js", "zone.js/testing"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/ui/**/*.ts",
+          "libs/ui/**/*.html",
+          "libs/ui/header/**/*.ts",
+          "libs/ui/header/**/*.html",
+          "libs/ui/image/**/*.ts",
+          "libs/ui/image/**/*.html",
+          "libs/ui/card/**/*.ts",
+          "libs/ui/card/**/*.html"
+        ]
+      }
+    }
+  }
+}

@@ -21,3 +21,15 @@ con il comanco nopm run  start di default cvienne utilizzato il file proxy.conf.
 
 APP:
 l'entri point dell'applicativo è definito tramite composizione mofulare mentre le featur fanno uso di standalone component ( l'obiettivo era di utilizzare entrambe le modalità)
+
+
+#commands 
+Generate publishable lib 
+❯ npx nx generate @nrwl/angular:library ui  --publishable --importPath=@fb/ui --prefix=fb-ui
+
+setup secondary en
+trypoint
+ npx nx g @nrwl/angular:library-secondary-entry-point --library=ui --name={moduleName}
+
+ generate component
+ npx nx generate @nrwl/angular:component --name={componentName} --project=ui --export=true

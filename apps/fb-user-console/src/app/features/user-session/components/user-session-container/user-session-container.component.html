@@ -1,2 +1,18 @@
+<section class="UserInfo__Container" *ngIf="user$ | async as user">
+    <fb-console-card [cardSubtitle]="'The number of submitted post'" [cardTitle]="'Posts'">
+        <div card-content>
+            <p>Name: {{user.name}}></p>
+            <p>Email: {{user.email}}></p>
+            <p>Gender: <span>{{user.gender}}</span></p>
+            <p>STATUS: <span [ngStyle]="">{{user.status}}</span></p>
+        </div>
+    </fb-console-card>
+</section>
 
-<h1>{{user$ | async | json}}</h1>
+
+<section class="UserDashboard__Container">
+    <fb-console-card [cardSubtitle]="'The number of submitted post'" [cardTitle]="'Posts'">
+        <div card-content></div>
+    </fb-console-card>
+</section>
+

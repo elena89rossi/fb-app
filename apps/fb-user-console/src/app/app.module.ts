@@ -9,9 +9,15 @@ import { NgModule } from "@angular/core";
 import { CoreModule } from "@fb-console/core";
 import { CommonModule } from "@angular/common";
 import { UserSessionGuard } from "./features/user-session/guards/user-session.guards";
+import { HeaderModule } from '@fb/ui/header';
+import { ImageModule } from "@fb/ui/image";
+import { CardModule } from "@fb/ui/card";
+import { MatButtonModule } from "@angular/material/button";
+
+
 
 @NgModule({
-    declarations: [AppComponent, NxWelcomeComponent],
+    declarations: [AppComponent],
       imports: [
           BrowserModule,
           BrowserAnimationsModule,
@@ -19,7 +25,10 @@ import { UserSessionGuard } from "./features/user-session/guards/user-session.gu
           HttpClientModule,
           ReactiveFormsModule,
           CoreModule,
-          APP_ROUTES
+          APP_ROUTES,
+          HeaderModule,
+          ImageModule,
+          MatButtonModule
       ],
     providers: [
         UserSessionGuard

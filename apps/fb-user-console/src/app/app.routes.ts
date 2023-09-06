@@ -5,14 +5,11 @@ import { UserSessionGuard } from "./features/user-session/guards/user-session.gu
 import { UserFormComponent } from "./features/user-session/components/user-form/user-form.component";
 
 export const appRoutes: Route[] = [
-    {
-        path: USER_ROUTES.UserDetail + '/:id',
-        canActivate: [UserSessionGuard],
-        component: UserSessionContainerComponent
-        // loadComponent: () =>
-        //   import('./features/user-session/components/user-session-container/user-session-container.component')
-        //     .then(m => m.UserSessionContainerComponent)
-    },
+    // {
+    //     path: USER_ROUTES.UserDetail + '/:id',
+    //     canActivate: [UserSessionGuard],
+    //     component: UserSessionContainerComponent
+    // },
     {
         path: '',
         canActivate: [UserSessionGuard],
@@ -21,9 +18,6 @@ export const appRoutes: Route[] = [
     {
         path: USER_ROUTES.RegisterNewUser,
         component: UserFormComponent
-        // loadComponent: () =>
-        //   import('./features/user-session/components/user-session-container/user-session-container.component')
-        //     .then(m => m.UserSessionContainerComponent)
     },
     { path: '**', redirectTo:  USER_ROUTES.RegisterNewUser }
 ];

@@ -9,7 +9,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "testManagement",
+            "prefix": "fbUi",
             "style": "camelCase"
           }
         ],
@@ -17,7 +17,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "fb-console",
+            "prefix": "fb-ui",
             "style": "kebab-case"
           }
         ]

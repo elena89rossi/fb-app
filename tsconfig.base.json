@@ -17,7 +17,11 @@
     "types": ["node", "jasmine"],
     "paths": {
       "@fb-console/core": ["libs/core/src/index.ts"],
-      "@fb-console/ui-components": ["libs/ui-components/src/index.ts"]
+      "@fb-console/ui-components": ["libs/ui-components/src/index.ts"],
+      "@fb/ui": ["libs/ui/src/index.ts"],
+      "@fb/ui/card": ["libs/ui/card/src/index.ts"],
+      "@fb/ui/header": ["libs/ui/header/src/index.ts"],
+      "@fb/ui/image": ["libs/ui/image/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

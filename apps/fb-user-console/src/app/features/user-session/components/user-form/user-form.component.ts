@@ -65,13 +65,10 @@ export class UserFormComponent {
   }
 
   private saveUser(user: IUser): void {
-   //TODO API
-   debugger;
    this.userSessionService.saveUser(user).pipe(
     takeUntil(this.destroyed$)
    ).subscribe((user: IUser) => {
     if(user?.id) {
-      this.router.navigate([USER_ROUTES.UserDetail, user.id]);
       this.router.navigate(['/']);
     }
    })

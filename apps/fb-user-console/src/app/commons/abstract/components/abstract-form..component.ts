@@ -47,5 +47,5 @@ export abstract class AbstractFormComponent<T>{
 
   protected abstract setFormValue(baseEntity: object): void;
 
-  protected abstract getSavePrivileges(privilege: string): string[];
+
 }

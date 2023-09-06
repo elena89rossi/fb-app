@@ -4,11 +4,12 @@ import { UserSessionService } from '../../services/user-session.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IUser } from '../../models/user.interface';
 import { Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { CardModule } from '@fb/ui/card';
 
 @Component({
   selector: 'fb-console-user-session-container',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CardModule],
   templateUrl: './user-session-container.component.html',
   styleUrls: ['./user-session-container.component.scss'],
 })
@@ -23,15 +24,15 @@ export class UserSessionContainerComponent implements OnInit {
 
   }
   
-  // private getIdFromRouteAndRefreshData(): void {
-  //   debugger;
-  //   this.route.params.pipe(
-  //     takeUntil(this.destroyed$),
-  //     tap((params: Params) => {
-  //       this.userId = params['id'];
-  //       this.userSessionService.getCurrentUser(this.userId);
-  //     }),
-  //   ).subscribe();
-  // }
+  private getIdFromRouteAndRefreshData(): void {
+    debugger;
+    this.route.params.pipe(
+      takeUntil(this.destroyed$),
+      tap((params: Params) => {
+        this.userId = params['id'];
+        this.userSessionService.getCurrentUser(this.userId);
+      }),
+    ).subscribe();
+  }
   
 }

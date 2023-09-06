@@ -1,1 +1,14 @@
+<fb-ui-header>
+    <span left-toolbar-items>
+        <fb-console-image [imageSrc]="logoImg"></fb-console-image>
+    </span>
+    <span right-toolbar-items>
+        <ng-container *ngIf="user$ | async as user">
+            <div class="UserSession__Container">
+                <p *ngIf="user.name">Hello {{user.name}}</p>
+                <button *ngIf="user.id" mat-button color="accent" (click)="simulateLogout()">Logout</button>
+            </div>
+        </ng-container>
+      </span>
+</fb-ui-header>
 <router-outlet></router-outlet>

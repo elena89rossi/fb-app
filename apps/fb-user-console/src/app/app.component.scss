@@ -1,0 +1,12 @@
+:host {
+    mat-toolbar {
+        background-color: white; 
+    }
+}
+.UserSession{
+    &__Container{
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

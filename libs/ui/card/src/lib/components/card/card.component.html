@@ -1,0 +1,13 @@
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title *ngIf="cardTitle">{{cardTitle}}</mat-card-title>
+      <mat-card-subtitle *ngIf="cardSubtitle">{{cardSubtitle}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <ng-content select="[card-content]"></ng-content>
+    </mat-card-content>
+    <mat-card-actions *ngIf="hasButtons" [align]="cardButtonAlignment">
+      <button mat-button *ngFor="let btn of cardButtons" (click)="handleActionButton(btn)">LIKE</button>
+    </mat-card-actions>
+  </mat-card>

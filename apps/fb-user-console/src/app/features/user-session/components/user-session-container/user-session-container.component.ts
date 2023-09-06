@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserSessionService } from '../../services/user-session.service';
-import { ActivatedRoute, Params } from '@angular/router';
 import { IUser } from '../../models/user.interface';
-import { Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { Observable, Subject,interval, map, of, switchMap, takeUntil } from 'rxjs';
 import { CardModule } from '@fb/ui/card';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
 @Component({
   selector: 'fb-console-user-session-container',
   standalone: true,
-  imports: [CommonModule, CardModule],
+  imports: [CommonModule, CardModule, MatToolbarModule, MatDividerModule],
   templateUrl: './user-session-container.component.html',
   styleUrls: ['./user-session-container.component.scss'],
 })
-export class UserSessionContainerComponent implements OnInit {
-  user$!: Observable<IUser>;
-  private userId!: number;
+export class UserSessionContainerComponent implements OnInit, OnDestroy {
+  protected user$!: Observable<IUser>;
+  protected userId$!: Observable<number>;
+  protected latestUpdateDate$!:Observable<Date>;
   private destroyed$: Subject<void> = new Subject();
-  constructor(private userSessionService: UserSessionService, private route: ActivatedRoute){}
+  constructor(private userSessionService: UserSessionService){}
 
   /**
    * Initializes the component and subscribes to the currentUser$ observable.
@@ -25,19 +26,25 @@ export class UserSessionContainerComponent implements OnInit {
    * @return {void}
    */
   ngOnInit(): void {
-      this.user$ = this.userSessionService.currentUser$.pipe(takeUntil(this.destroyed$))
-
+      this.user$ = this.userSessionService.currentUser$.pipe(takeUntil(this.destroyed$));
+      this.checkForUserUpdate();
   }
-  //TODO REMOVE
-  // private getIdFromRouteAndRefreshData(): void {
-  //   debugger;
-  //   this.route.params.pipe(
-  //     takeUntil(this.destroyed$),
-  //     tap((params: Params) => {
-  //       this.userId = params['id'];
-  //       this.userSessionService.getCurrentUser(this.userId);
-  //     }),
-  //   ).subscribe();
-  // }
-  
+
+  ngOnDestroy(): void {
+      this.destroyed$.next();
+      this.destroyed$.complete();
+  }
+
+  protected getObjectKeys(obj: any): string[] {
+    return Object.keys(obj);
+  }
+
+  private checkForUserUpdate(): void {
+    const int = 300000;
+    this.latestUpdateDate$ = interval(int).pipe(
+      takeUntil(this.destroyed$),
+      switchMap(() => this.userSessionService.getCurrentUser()),
+      map(() => new Date())
+    )
+  }
 }

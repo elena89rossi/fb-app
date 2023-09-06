@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FB_LOGO } from "./commons/static-entities/logo-base64";
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject, take, takeUntil } from "rxjs";
 import { UserSessionService } from "./features/user-session/services/user-session.service";
 import { IUser } from "./features/user-session/models/user.interface";
+import { SnackbarNotificationsService } from "@fb-console/core";
+import { Router } from "@angular/router";
+import { USER_ROUTES } from "./features/user-session/static-entities/routes/user-routes.enum";
 
 @Component({
   standalone: false,
@@ -16,7 +19,11 @@ export class AppComponent implements OnInit, OnDestroy {
   protected user$!: Observable<IUser>;
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private userSessionService: UserSessionService) {}
+  constructor(
+    private userSessionService: UserSessionService, 
+    private notificationService: SnackbarNotificationsService,
+    private router: Router
+    ) {}
     /**
    * Initializes the component.
    *
@@ -34,8 +41,13 @@ export class AppComponent implements OnInit, OnDestroy {
    * @return {void} This function does not return a value.
    */
   protected simulateLogout(): void {
-    debugger;
-    this.userSessionService.deleteUser().subscribe(() => alert('User successfully logged out'));
+    this.userSessionService.deleteUser().pipe(
+      takeUntil(this.destroy$),
+      take(1)
+    ).subscribe(() => {
+      this.notificationService.showSuccess('User successfully logged out');
+      this.router.navigate(['/' + USER_ROUTES.RegisterNewUser])
+    })
   }
   /**
    * Destroys the component and cleans up any resources.

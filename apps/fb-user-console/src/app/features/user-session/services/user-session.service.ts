@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, distinctUntilChanged, map, shareReplay, switchMap, take, tap } from 'rxjs';
+import { BehaviorSubject, Observable, OperatorFunction, distinctUntilChanged, filter, map, shareReplay, switchMap, take, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { UserApiService } from './user-api.service';
 import { IUser } from '../models/user.interface';
@@ -39,15 +39,23 @@ export class UserSessionService {
  * @param {number} id - The ID of the user to retrieve.
  * @return {Observable<IUser>} The observable that emits the user object.
  */
-  public getCurrentUser(id: number): Observable<IUser> {
-    return this.currentUser$.pipe(
-      map((user:IUser)=> user.id),
-      switchMap((id: number) => this.userApiService.getUser(id)),
-      tap((user: IUser) => {
-        this.currenUserSubject.next(user)
-        }
-      )    
-    )
+  public getCurrentUser(): Observable<IUser> {
+    const userId = this.currenUserSubject.value.id;
+    return this.userApiService.getUser(userId).pipe(
+        tap((user: IUser) => {
+          this.currenUserSubject.next(user);
+          }
+        )
+      )
+    // return this.currentUser$.pipe(
+    //   distinctUntilChanged(),
+    //   map((user:IUser)=> user.id),
+    //   switchMap((id: number) => this.userApiService.getUser(id)),
+    //   tap((user: IUser) => {
+    //     this.currenUserSubject.next(user)
+    //     }
+    //   )    
+    // )
   }
 
   /**
@@ -56,8 +64,8 @@ export class UserSessionService {
    * @return {Observable<any>} An observable that emits the result of the deletion.
    */
   public deleteUser(): Observable<any> {
-    debugger;
     return this.currentUser$.pipe(
+      filter(obj => Object.keys(obj).length > 0),
       map((user:IUser)=> user.id),
       switchMap((id: number) => this.closeUserSession(id))
     ) 
@@ -83,11 +91,10 @@ export class UserSessionService {
    * @return {Observable<any>} An Observable that emits the result of deleting the user and performs additional actions.
    */
   private closeUserSession(id: number): Observable<any> {
-  //TODO TYPES
     return this.userApiService.deleteUser(id).pipe(
       take(1),
       tap(()=> {
-        sessionStorage.removeItem(CURRENT_USER);
+        localStorage.removeItem(CURRENT_USER);
         this.currenUserSubject.next({} as IUser);
       })
     )

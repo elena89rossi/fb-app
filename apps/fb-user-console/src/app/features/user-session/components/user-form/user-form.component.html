@@ -1,4 +1,4 @@
-<form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmit(userForm)">
+<form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmit()">
     <div class="UserForm__Container">
         <div class="UserForm__Content">
             <mat-card class="UserForm__Card">
@@ -38,7 +38,7 @@
                     data-cy="testset-output-type"
                     formControlName="gender"
                     title="Gender">
-                    <mat-option *ngFor="let opt of this.genderOpts" [value]="opt">{{opt}} </mat-option>
+                    <mat-option *ngFor="let opt of this.genderOpts; let i =index" [value]="opt">{{opt}} </mat-option>
                 </mat-select>
                 <mat-label>Gender</mat-label>
                 <mat-error *ngIf="f['gender'].hasError('required')">

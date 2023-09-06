@@ -3,6 +3,7 @@ import { USER_ROUTES } from "./features/user-session/static-entities/routes/user
 import { UserSessionContainerComponent } from "./features/user-session/components/user-session-container/user-session-container.component";
 import { UserSessionGuard } from "./features/user-session/guards/user-session.guards";
 import { UserFormComponent } from "./features/user-session/components/user-form/user-form.component";
+import { RegistationContainerComponent } from "./features/user-session/components/registation-container/registation-container.component";
 
 export const appRoutes: Route[] = [
     // {
@@ -17,7 +18,7 @@ export const appRoutes: Route[] = [
     },
     {
         path: USER_ROUTES.RegisterNewUser,
-        component: UserFormComponent
+        component: RegistationContainerComponent
     },
     { path: '**', redirectTo:  USER_ROUTES.RegisterNewUser }
 ];

@@ -1,0 +1,53 @@
+$green-1: #F6FFED;
+$green-2: #B7EB8F;
+$gray: #595959;
+$red-1: #FFF1F0;
+$red-2: #FFA39E;
+
+.mdc-snackbar__surface {
+  background-color: transparent!important;
+  box-shadow: none!important;
+  padding: 0!important;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  min-width: 100px!important;
+}
+
+.mdc-snackbar__label {
+  padding: 0!important;
+}
+
+.mat-mdc-snack-bar-label {
+  color: $gray!important;
+}
+.mat-mdc-snack-bar-container {
+  padding: 8px 16px;
+}
+
+.custom-snackbar {
+  display: flex;
+  align-items: baseline;
+}
+
+.success-snackbar {
+  background: $green-1;
+  color: $gray;
+  border: solid 1px $green-2;
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+.alert-snackbar {
+  background: $red-1;
+  color: $gray;
+  border: solid 1px $red-2;
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+
+
+
+
+

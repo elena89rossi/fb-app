@@ -12,7 +12,6 @@ import { GENDER } from '../../static-entities/gender/gender.enum';
 import { IUser } from '../../models/user.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
-import { USER_ROUTES } from '../../static-entities/routes/user-routes.enum';
 import { UserSessionService } from '../../services/user-session.service';
 
 export const EMAIL_VALIDATOR_PATTERN = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
@@ -41,7 +40,7 @@ export class UserFormComponent {
   }
 
   get f() { return this.userForm.controls; }
-  
+
   /**
    * Destroys the component and cleans up any resources.
    *
@@ -57,12 +56,8 @@ export class UserFormComponent {
    * @param {FormGroup} user - The user form group.
    * @return {void} This function does not return a value.
    */
-  protected onSubmit(user: FormGroup): void {
-    debugger;
-    console.log(this.userForm)
-    console.log(user)
+  protected onSubmit(): void {
     if (!this.userForm.invalid) {
-      //TODO TIPIZZARE IL FORMGROUP
       this.saveUser(this.userForm.value);
     } else {
       this.markAllAsTouched();

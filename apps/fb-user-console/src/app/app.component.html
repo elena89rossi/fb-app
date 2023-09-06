@@ -5,8 +5,8 @@
     <span right-toolbar-items>
         <ng-container *ngIf="user$ | async as user">
             <div class="UserSession__Container">
-                <p *ngIf="user.name">Hello {{user.name}}</p>
-                <button *ngIf="user.id" mat-button color="accent" (click)="simulateLogout()">Logout</button>
+                <div class="UserSession__Name" *ngIf="user.name">Hello {{user.name}}!</div>
+                <button *ngIf="user.id" mat-stroked-button color="primary" (click)="simulateLogout()">Logout</button>
             </div>
         </ng-container>
       </span>

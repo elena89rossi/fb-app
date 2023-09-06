@@ -31,7 +31,7 @@ export class UserApiService extends AbstractBaseHttpService {
    * @return {Observable<IUser>} An Observable that emits the retrieved user.
    */
   public getUser(id: number): Observable<IUser> {
-    return this.http.get<IUser>(this.getControllerBaseUrl() + 'id');
+    return this.http.get<IUser>(this.getControllerBaseUrl() + `/${id}`);
   }
 
   /**
@@ -54,7 +54,6 @@ export class UserApiService extends AbstractBaseHttpService {
    * @return {Observable<HttpResponse<null>>} A response indicating the success of the deletion.
    */
   public deleteUser(id: number): Observable<HttpResponse<null>> {
-    //TODO VERIFICARE COSA RITPRNA
-      return this.http.delete(this.getControllerBaseUrl() + id).pipe(map(() => new HttpResponse<null>()));
+      return this.http.delete(this.getControllerBaseUrl() + `/${id}`).pipe(map(() => new HttpResponse<null>()));
   }
 }

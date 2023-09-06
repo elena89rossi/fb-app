@@ -3,8 +3,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100vw;
-        height: 100vh;
     }
     &__Content {
         width: 30%;
@@ -17,9 +15,6 @@
         mat-form-field{
             margin: 1rem 2rem 0 2rem;
         }
-    }
-    &__Toolbar{
-
     }
 
     &__Submit {

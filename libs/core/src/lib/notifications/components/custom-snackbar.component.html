@@ -1,0 +1,8 @@
+<div class="custom-snackbar">
+  <div class="d-flex flex-col align-items-center justify-content-center">
+    <div *ngIf="message " class="word-break" data-karma="message" data-cy="custom-snack-bar-message" [innerHTML]="message"></div>
+  </div>
+  <div *ngIf="close" class="d-flex align-items-center m-l-auto text-nowrap" data-karma="close">
+    <button mat-button (click)="closeSnackBar()" data-karma="close">Close</button>
+  </div>
+</div>

@@ -1,18 +1,22 @@
+
 <section class="UserInfo__Container" *ngIf="user$ | async as user">
-    <fb-console-card [cardSubtitle]="'The number of submitted post'" [cardTitle]="'Posts'">
+    <fb-console-card [cardSubtitle]="'NOTE: Every 5 minutes, user data are refreshed'" [cardTitle]="'Current User Info'">
         <div card-content>
-            <p>Name: {{user.name}}></p>
-            <p>Email: {{user.email}}></p>
-            <p>Gender: <span>{{user.gender}}</span></p>
-            <p>STATUS: <span [ngStyle]="">{{user.status}}</span></p>
+            <ng-container *ngFor="let key of getObjectKeys(user); let i = index">
+                <div class="UserInfo__Data">
+                    <h6 *ngIf="user[key]">{{key | uppercase}}<span>{{user[key]}}</span></h6> 
+                </div>              
+            </ng-container>
+            <mat-divider></mat-divider>
+            <div class="UserInfo__LastUpdate">
+                <p> Latest update: 
+                    <span  *ngIf="latestUpdateDate$ | async as lastUpdate; else noData">  
+                        {{lastUpdate | date:'short'}}
+                    </span>
+                </p>   
+            </div>
         </div>
     </fb-console-card>
 </section>
-
-
-<section class="UserDashboard__Container">
-    <fb-console-card [cardSubtitle]="'The number of submitted post'" [cardTitle]="'Posts'">
-        <div card-content></div>
-    </fb-console-card>
-</section>
+<ng-template #noData>N/A</ng-template>
 

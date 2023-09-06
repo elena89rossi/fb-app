@@ -8,6 +8,6 @@
         <ng-content select="[card-content]"></ng-content>
     </mat-card-content>
     <mat-card-actions *ngIf="hasButtons" [align]="cardButtonAlignment">
-      <button mat-button *ngFor="let btn of cardButtons" (click)="handleActionButton(btn)">LIKE</button>
+      <button mat-button *ngFor="let btn of cardButtons; let i = index" (click)="handleActionButton(btn)">LIKE</button>
     </mat-card-actions>
   </mat-card>

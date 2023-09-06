@@ -54,7 +54,7 @@ export class UserSessionContainerComponent implements OnInit, OnDestroy {
    * @returns {void} 
    */
   private checkForUserUpdate(): void {
-    const int = 300000;
+    const int = 50000;
     this.latestUpdateDate$ = interval(int).pipe(
       takeUntil(this.destroyed$),
       switchMap(() => this.userSessionService.getCurrentUser()),

@@ -18,9 +18,7 @@ export class GlobalErrorHandlerService {
    */
   public handleError(error: Error | HttpErrorResponse): void {
     if (error instanceof HttpErrorResponse) {
-      this.notificationService.showError(error.error);
-    } else {
       this.notificationService.showError(error.message);
-    }
+    } 
   }
 }

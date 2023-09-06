@@ -33,8 +33,8 @@ describe('GlobalErrorHandlerService', () => {
       name: 'name'
     };
     service.handleError(err);
-    expect(notificationServiceSpy.showError).toHaveBeenCalledOnceWith(err.message);
-  });
+    expect(notificationServiceSpy.showError).not.toHaveBeenCalled()
+    });
 
   it('should test handleError', () => {
     expect(service).toBeTruthy();

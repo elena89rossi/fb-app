@@ -5,7 +5,7 @@ The project aims to demonstrate different implementation techniques within the c
 
 The application flow consists of the following steps:
 
-- Launching the application with access to the registration page.
+- Launching the application the registration page is displayed.
 NOTE: Registration coincides with the login (fake) phase and the initialization of a user session. 
 User data sre persisted in local storage to allow the user to open multiple browser instances.
 
@@ -20,9 +20,9 @@ NOTE: Data is refreshed every 5 minutes through an HTTP polling call (to the use
 
  - Core lib : single entrypoint lib without exportable entities and unit test implementation.
 
- - UI Lib: library with multiple secondary entrypoint. This architecture allows developer to import into project only what he want to use (optimization for bundle size). Simple example om dummy component...
+ - UI Lib: library with multiple secondary entrypoint. This architecture allows developer to import into project only what he want to use (optimization for bundle size).
 
- - UserSession : concepts related to data persistence and dynamic data updates  (browser storage, polling, share data for multiple subsctiption, no  nested subscription, destroy subsctiption usign takeUntil, use share rapla to use only one stream for multiple subscribers....)
+ - UserSession : concepts related to data persistence and dynamic data updates  (browser storage, polling, share data for multiple subsctiption, no  nested subscription, destroy subsctiption using takeUntil, use shareReplay to use only one stream for multiple subscribers....)
 
 ## Execution Commands
  ### Application launch
@@ -40,19 +40,3 @@ UI Lib (secondary entrypoint): `npm run build:ui`
 
 
 
-con il comanco nopm run  start di default cvienne utilizzato il file proxy.conf.dev per riuscire in locale a puntare alle api di gorest
-
-APP:
-l'entri point dell'applicativo è definito tramite composizione mofulare mentre le featur fanno uso di standalone component ( l'obiettivo era di utilizzare entrambe le modalità)
-
-
-#commands 
-Generate publishable lib 
-❯ npx nx generate @nrwl/angular:library ui  --publishable --importPath=@fb/ui --prefix=fb-ui
-
-setup secondary en
-trypoint
- npx nx g @nrwl/angular:library-secondary-entry-point --library=ui --name={moduleName}
-
- generate component
- npx nx generate @nrwl/angular:component --name={componentName} --project=ui --export=true
